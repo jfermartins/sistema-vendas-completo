@@ -16,7 +16,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use(rateLimiter);
+// app.use(rateLimiter); // Temporariamente desativado para criação de usuário
 
 app.use(pagination);
 
