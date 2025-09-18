@@ -28,7 +28,17 @@ import {
 } from "@/components/ui/table";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
-import { Plus, Edit, Trash2, ShoppingCart, Search, Loader2, User, Package, DollarSign } from "lucide-react";
+import { 
+  Plus, 
+  Edit, 
+  Trash2, 
+  ShoppingCart, 
+  Search, 
+  Loader2, 
+  User, 
+  Package, 
+  DollarSign 
+} from "lucide-react";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -105,6 +115,15 @@ const Orders = () => {
     }
   };
 
+  // Função para validar produtos antes de enviar
+  const validateProducts = (productsToValidate) => {
+    const invalidProducts = productsToValidate.filter(p => {
+      return !products.some(prod => prod.id === p.product_id);
+    });
+    
+    return invalidProducts.length === 0;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setFormLoading(true);
@@ -112,6 +131,13 @@ const Orders = () => {
     setSuccess("");
 
     try {
+      // Validar produtos antes de enviar
+      if (!validateProducts(formData.products)) {
+        setError("Alguns produtos selecionados não existem no sistema");
+        setFormLoading(false);
+        return;
+      }
+
       const orderData = {
         customer_id: formData.customer_id,
         products: formData.products.map(item => ({
@@ -134,7 +160,14 @@ const Orders = () => {
       await fetchOrders();
       handleDialogClose();
     } catch (err) {
-      setError(err.response?.data?.message || err.message || "Erro ao processar pedido");
+      const errorMessage = err.response?.data?.message || err.message || "Erro ao processar pedido";
+      setError(errorMessage);
+      
+      // Verificar se é o erro específico de produtos não encontrados
+      if (errorMessage.includes("Could not find any products with the given ids")) {
+        setError("Erro: Alguns produtos não foram encontrados. Verifique os IDs dos produtos.");
+      }
+      
       console.error('Erro detalhado:', err.response?.data);
     } finally {
       setFormLoading(false);
