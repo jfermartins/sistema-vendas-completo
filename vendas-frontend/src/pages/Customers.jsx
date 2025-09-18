@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { customersService } from '@/services/customers';
+import { customerService } from '@/services/api';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Plus, Edit, Trash2, Users, Search, Mail } from 'lucide-react';
+import { Plus, Edit, Trash2, Users, Search, Mail, Phone } from 'lucide-react';
 
 const Customers = () => {
   const [customers, setCustomers] = useState([]);
@@ -19,6 +19,7 @@ const Customers = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '', // ← CAMPO ADICIONADO
   });
   const [formLoading, setFormLoading] = useState(false);
 
@@ -29,8 +30,17 @@ const Customers = () => {
   const fetchCustomers = async () => {
     try {
       setLoading(true);
-      const data = await customersService.getCustomers();
-      setCustomers(data);
+      const response = await customerService.getAll();
+
+      console.log("API customers response:", response.data);
+
+      let data = response.data;
+
+      if (!Array.isArray(data) && data.customers) {
+        data = data.customers;
+      }
+
+      setCustomers(Array.isArray(data) ? data : []);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -44,14 +54,14 @@ const Customers = () => {
     setError('');
 
     try {
-      const { name, email } = formData;
-      
+      const { name, email, phone } = formData; // ← INCLUA PHONE
+
       if (editingCustomer) {
-        await customersService.updateCustomer(editingCustomer.id, name, email);
+        await customerService.update(editingCustomer.id, { name, email, phone }); // ← INCLUA PHONE
       } else {
-        await customersService.createCustomer(name, email);
+        await customerService.create({ name, email, phone }); // ← INCLUA PHONE
       }
-      
+
       await fetchCustomers();
       setIsDialogOpen(false);
       resetForm();
@@ -67,6 +77,7 @@ const Customers = () => {
     setFormData({
       name: customer.name,
       email: customer.email,
+      phone: customer.phone || '', // ← INCLUA PHONE
     });
     setIsDialogOpen(true);
   };
@@ -77,7 +88,7 @@ const Customers = () => {
     }
 
     try {
-      await customersService.deleteCustomer(id);
+      await customerService.delete(id);
       await fetchCustomers();
     } catch (err) {
       setError(err.message);
@@ -85,7 +96,7 @@ const Customers = () => {
   };
 
   const resetForm = () => {
-    setFormData({ name: '', email: '' });
+    setFormData({ name: '', email: '', phone: '' }); // ← ADICIONE PHONE
     setEditingCustomer(null);
     setError('');
   };
@@ -97,7 +108,8 @@ const Customers = () => {
 
   const filteredCustomers = customers.filter(customer =>
     customer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    customer.email.toLowerCase().includes(searchTerm.toLowerCase())
+    customer.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (customer.phone && customer.phone.includes(searchTerm))
   );
 
   const formatDate = (dateString) => {
@@ -160,6 +172,17 @@ const Customers = () => {
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="cliente@email.com"
+                  required
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="phone">Telefone</Label>
+                <Input
+                  id="phone"
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  placeholder="(11) 99999-9999"
                   required
                 />
               </div>
@@ -228,6 +251,7 @@ const Customers = () => {
                 <TableRow>
                   <TableHead>Nome</TableHead>
                   <TableHead>Email</TableHead>
+                  <TableHead>Telefone</TableHead>
                   <TableHead>Data de Cadastro</TableHead>
                   <TableHead className="text-right">Ações</TableHead>
                 </TableRow>
@@ -240,6 +264,12 @@ const Customers = () => {
                       <div className="flex items-center space-x-2">
                         <Mail className="h-4 w-4 text-muted-foreground" />
                         <span>{customer.email}</span>
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex items-center space-x-2">
+                        <Phone className="h-4 w-4 text-muted-foreground" />
+                        <span>{customer.phone || 'Não informado'}</span>
                       </div>
                     </TableCell>
                     <TableCell>{formatDate(customer.created_at)}</TableCell>
@@ -274,5 +304,3 @@ const Customers = () => {
 };
 
 export default Customers;
-
-

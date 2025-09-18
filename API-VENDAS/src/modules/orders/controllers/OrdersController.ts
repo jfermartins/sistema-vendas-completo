@@ -1,8 +1,18 @@
 import { Request, Response } from 'express';
+import ListOrderService from '../services/ListOrderService'; // Importe o serviço
 import ShowOrderService from '../services/ShowOrderService';
 import CreateOrderService from '../services/CreateOrderService';
 
 export default class OrdersController {
+  // ADICIONE ESTE MÉTODO PARA LISTAR TODOS OS PEDIDOS
+  public async index(request: Request, response: Response): Promise<Response> {
+    const listOrders = new ListOrderService();
+
+    const orders = await listOrders.execute();
+
+    return response.json(orders);
+  }
+
   public async show(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
 

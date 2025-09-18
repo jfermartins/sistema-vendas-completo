@@ -1,7 +1,7 @@
 import { getCustomRepository } from 'typeorm';
-import AppError from '@shared/errors/AppError';
-import CustomersRepository from '../typeorm/repositories/CustomersRepository';
 import Customer from '../typeorm/entities/Customer';
+import CustomersRepository from '../typeorm/repositories/CustomersRepository';
+import AppError from '@shared/errors/AppError';
 
 interface IRequest {
   id: string;
@@ -14,7 +14,7 @@ class ShowCustomerService {
     const customer = await customersRepository.findById(id);
 
     if (!customer) {
-      throw new AppError('Customer not found. ');
+      throw new AppError('Customer not found.');
     }
 
     return customer;

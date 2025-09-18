@@ -6,8 +6,7 @@ import {
   Users, 
   ShoppingCart, 
   DollarSign,
-  TrendingUp,
-  TrendingDown
+  TrendingUp
 } from 'lucide-react'
 import { productService, customerService, orderService } from '../services/api'
 
@@ -29,24 +28,22 @@ export default function Dashboard() {
     try {
       setLoading(true)
       
-      // Carregar estatísticas básicas
       const [productsRes, customersRes, ordersRes] = await Promise.all([
         productService.getAll(),
         customerService.getAll(),
         orderService.getAll()
       ])
 
-      const orders = ordersRes.data
+      const orders = ordersRes.data || []
       const revenue = orders.reduce((total, order) => total + parseFloat(order.total || 0), 0)
 
       setStats({
-        products: productsRes.data.length,
-        customers: customersRes.data.length,
+        products: productsRes.data?.length || 0,
+        customers: customersRes.data?.length || 0,
         orders: orders.length,
         revenue
       })
 
-      // Pegar os últimos 5 pedidos
       setRecentOrders(orders.slice(-5).reverse())
       
     } catch (error) {
@@ -60,7 +57,7 @@ export default function Dashboard() {
     return new Intl.NumberFormat('pt-BR', {
       style: 'currency',
       currency: 'BRL'
-    }).format(value)
+    }).format(value || 0)
   }
 
   const formatDate = (dateString) => {

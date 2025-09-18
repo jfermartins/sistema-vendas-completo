@@ -5,31 +5,22 @@ import Customer from '../entities/Customer';
 class CustomersRepository extends Repository<Customer> {
   public async findByName(name: string): Promise<Customer | undefined> {
     const customer = await this.findOne({
-      where: {
-        name,
-      },
+      where: { name },
     });
-
     return customer;
   }
 
   public async findById(id: string): Promise<Customer | undefined> {
     const customer = await this.findOne({
-      where: {
-        id,
-      },
+      where: { id },
     });
-
     return customer;
   }
 
   public async findByEmail(email: string): Promise<Customer | undefined> {
     const customer = await this.findOne({
-      where: {
-        email,
-      },
+      where: { email },
     });
-
     return customer;
   }
 }

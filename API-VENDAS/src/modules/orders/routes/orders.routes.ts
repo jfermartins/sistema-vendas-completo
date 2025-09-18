@@ -8,6 +8,9 @@ const orderController = new OrdersController();
 
 ordersRouter.use(isAuthenticated);
 
+// ADICIONE ESTA ROTA PARA LISTAR TODOS OS PEDIDOS
+ordersRouter.get('/', orderController.index);
+
 ordersRouter.get(
   '/:id',
   celebrate({
