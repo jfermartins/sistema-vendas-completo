@@ -138,6 +138,5 @@ Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou pull r
 ## Autor
 
 -   **Jane Fernanda Martins** (Backend) - [https://linkedin.com/in/jfermartins](https://linkedin.com/in/jfermartins)
--   **Manus AI** (Frontend e Integração)
-
+- 
 # sistema-vendas-completo
