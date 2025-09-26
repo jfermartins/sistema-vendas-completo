@@ -35,7 +35,7 @@ O projeto é dividido em duas partes principais:
 
 ## Tecnologias Utilizadas
 
-### Backend (API-VENDAS)
+### Backend (backend)
 
 -   **Node.js**: Ambiente de execução JavaScript.
 -   **TypeScript**: Tipagem estática para maior segurança e manutenibilidade.
@@ -48,7 +48,7 @@ O projeto é dividido em duas partes principais:
 -   **Nodemailer**: Envio de e-mails.
 -   **Celebrate/Joi**: Validação de dados.
 
-### Frontend (vendas-frontend)
+### Frontend (frontend)
 
 -   **React**: Biblioteca JavaScript para construção de interfaces de usuário.
 -   **Vite**: Ferramenta de build rápida.
@@ -71,18 +71,18 @@ Certifique-se de ter as seguintes ferramentas instaladas em sua máquina:
 
 Siga os passos abaixo para configurar e executar o projeto completo:
 
-### 1. Configuração do Backend (API-VENDAS)
+### 1. Configuração do Backend (backend)
 
 1.  **Navegue até o diretório do backend:**
     ```bash
-    cd API-VENDAS
+    cd backend
     ```
 2.  **Instale as dependências:**
     ```bash
     npm install # ou yarn install
     ```
 3.  **Configure as variáveis de ambiente:**
-    Crie um arquivo `.env` na raiz do diretório `API-VENDAS` baseado no `.env.example` e preencha com suas configurações (banco de dados, JWT, e-mail).
+    Crie um arquivo `.env` na raiz do diretório `backend` baseado no `.env.example` e preencha com suas configurações (banco de dados, JWT, e-mail).
 4.  **Inicie os serviços do banco de dados e cache com Docker:**
     ```bash
     docker-compose up -d
@@ -97,18 +97,18 @@ Siga os passos abaixo para configurar e executar o projeto completo:
     ```
     A API estará disponível em `http://localhost:3333`.
 
-### 2. Configuração do Frontend (vendas-frontend)
+### 2. Configuração do Frontend (frontend)
 
 1.  **Abra um novo terminal e navegue até o diretório do frontend:**
     ```bash
-    cd vendas-frontend
+    cd frontend
     ```
 2.  **Instale as dependências:**
     ```bash
     pnpm install
     ```
 3.  **Verifique a configuração da API:**
-    O frontend está configurado para se comunicar com a API em `http://localhost:3333`. Se a sua API estiver em outro endereço, edite o arquivo `vendas-frontend/src/services/api.js` para ajustar a `baseURL`.
+    O frontend está configurado para se comunicar com a API em `http://localhost:3333`. Se a sua API estiver em outro endereço, edite o arquivo `frontend/src/services/api.js` para ajustar a `baseURL`.
 4.  **Inicie o servidor de desenvolvimento do frontend:**
     ```bash
     pnpm run dev
@@ -119,7 +119,7 @@ Siga os passos abaixo para configurar e executar o projeto completo:
 
 ### Rotas da API (Backend)
 
-Consulte o `API-VENDAS/README.md` para a lista completa de rotas da API.
+Consulte o `backend/README.md` para a lista completa de rotas da API.
 
 ### Rotas do Frontend
 
