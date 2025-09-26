@@ -15,8 +15,8 @@ O objetivo deste projeto é fornecer uma plataforma robusta para gerenciamento d
 
 O projeto é dividido em duas partes principais:
 
-1.  **API-VENDAS (Backend)**: A lógica de negócio e persistência de dados.
-2.  **vendas-frontend (Frontend)**: A interface de usuário para interagir com a API.
+1.  **backend (Backend)**: A lógica de negócio e persistência de dados.
+2.  **frontend (Frontend)**: A interface de usuário para interagir com a API.
 
 ## Estrutura do Repositório
 
