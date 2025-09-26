@@ -22,11 +22,11 @@ O projeto é dividido em duas partes principais:
 
 ```
 ./
-├── API-VENDAS/         # Repositório do Backend (Node.js, TypeScript, Express, TypeORM)
+├── backend/         # Repositório do Backend (Node.js, TypeScript, Express, TypeORM)
 │   ├── src/
 │   ├── ...
 │   └── README.md       # Documentação específica do Backend
-├── vendas-frontend/    # Repositório do Frontend (React, Vite, Tailwind CSS, Shadcn/ui)
+├── frontend/    # Repositório do Frontend (React, Vite, Tailwind CSS, Shadcn/ui)
 │   ├── src/
 │   ├── ...
 │   └── README.md       # Documentação específica do Frontend
