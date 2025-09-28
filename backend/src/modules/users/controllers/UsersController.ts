@@ -9,6 +9,8 @@ export default class UsersController {
 
     const users = await listUser.execute();
 
+    // instanceToInstance já aplica as transformações @Exclude e @Expose
+    // O ID será automaticamente excluído da resposta
     return response.json(instanceToInstance(users));
   }
 
@@ -23,6 +25,8 @@ export default class UsersController {
       password,
     });
 
+    // instanceToInstance já aplica as transformações @Exclude e @Expose
+    // O ID será automaticamente excluído da resposta
     return response.json(instanceToInstance(user));
   }
 }

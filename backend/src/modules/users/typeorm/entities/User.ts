@@ -10,6 +10,7 @@ import { Exclude, Expose } from 'class-transformer';
 @Entity('users')
 class User {
   @PrimaryGeneratedColumn('uuid')
+  @Exclude() // Exclui o ID das respostas da API por segurança
   id: string;
 
   @Column()
@@ -38,6 +39,11 @@ class User {
     }
 
     return `${process.env.APP_API_URL}/files/${this.avatar}`;
+  }
+
+  // Método interno para obter o ID (usado apenas no backend)
+  getId(): string {
+    return this.id;
   }
 }
 

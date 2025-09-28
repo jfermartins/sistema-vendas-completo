@@ -195,7 +195,7 @@ export default function Users() {
                           </div>
                           <div>
                             <p className="font-medium">{user.name}</p>
-                            <p className="text-sm text-gray-500">ID: {user.id}</p>
+                            {/* ID removido por questões de segurança */}
                           </div>
                         </div>
                       </TableCell>
