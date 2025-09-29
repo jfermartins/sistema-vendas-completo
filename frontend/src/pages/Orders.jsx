@@ -632,7 +632,7 @@ const Orders = () => {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>ID</TableHead>
+
                     <TableHead>Cliente</TableHead>
                     <TableHead>Produtos</TableHead>
                     <TableHead>Data</TableHead>
@@ -644,7 +644,7 @@ const Orders = () => {
                 <TableBody>
                   {filteredOrders.map((order) => (
                     <TableRow key={order.id}>
-                      <TableCell className="font-medium">#{order.id?.slice(-8)}</TableCell>
+
                       <TableCell>
                         <div className="flex items-center gap-2">
                           <User className="h-4 w-4 text-muted-foreground" />
@@ -657,7 +657,7 @@ const Orders = () => {
                             <div key={idx} className="flex items-center gap-1 text-sm">
                               <Package className="h-3 w-3 text-muted-foreground" />
                               <span className="truncate">
-                                {op.quantity}x {op.product?.name || "Produto não encontrado"}
+                                {op.quantity}x {op.product?.name}
                               </span>
                             </div>
                           ))}

@@ -7,7 +7,7 @@ class ListOrderService {
     const ordersRepository = getCustomRepository(OrdersRepository);
 
     const orders = await ordersRepository.find({
-      relations: ['order_products', 'customer'],
+      relations: ['order_products', 'order_products.product', 'customer'],
     });
 
     return orders;
