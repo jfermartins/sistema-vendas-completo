@@ -16,6 +16,9 @@ class Order {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @Column('int', { unique: true, generated: 'increment' })
+  order_number: number;
+
   @ManyToOne(() => Customer)
   @JoinColumn({ name: 'customer_id' })
   customer: Customer;

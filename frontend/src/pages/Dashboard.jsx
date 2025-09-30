@@ -182,7 +182,7 @@ export default function Dashboard() {
                 {recentOrders.map((order) => (
                   <div key={order.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                     <div>
-                      <p className="font-medium">Pedido #{order.id}</p>
+                      <p className="font-medium">Pedido #{order.order_number}</p>
                       <p className="text-sm text-gray-600">
                         Cliente: {order.customer?.name || 'N/A'}
                       </p>
