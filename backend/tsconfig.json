@@ -22,7 +22,7 @@
     // "removeComments": true,                /* Do not emit comments to output. */
     // "noEmit": true,                        /* Do not emit outputs. */
     // "importHelpers": true,                 /* Import emit helpers from 'tslib'. */
-    // "downlevelIteration": true,            /* Provide full support for iterables in 'for-of', spread, and destructuring when targeting 'ES5' or 'ES3'. */
+    "downlevelIteration": true,            /* Provide full support for iterables in 'for-of', spread, and destructuring when targeting 'ES5' or 'ES3'. */
     // "isolatedModules": true,               /* Transpile each file as a separate module (similar to 'ts.transpileModule'). */
 
     /* Strict Type-Checking Options */
@@ -45,7 +45,7 @@
     /* Module Resolution Options */
 /* Module Resolution Options */
     "moduleResolution": "node",            /* ATIVE ESTA LINHA (Remova as barras // do começo) */
-    "baseUrl": ".",                       /* Base directory to resolve non-absolute module names. */
+    "baseUrl": "./",                       /* Base directory to resolve non-absolute module names. */
     "paths": {
       "@config/*": [
         "src/config/*"
