@@ -45,7 +45,7 @@
     /* Module Resolution Options */
 /* Module Resolution Options */
     "moduleResolution": "node",            /* ATIVE ESTA LINHA (Remova as barras // do começo) */
-    "baseUrl": "./",                       /* Base directory to resolve non-absolute module names. */
+    "baseUrl": ".",                       /* Base directory to resolve non-absolute module names. */
     "paths": {
       "@config/*": [
         "src/config/*"
